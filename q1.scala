@@ -6,7 +6,9 @@ object CaesarCipher {
     normaltext.map { char =>
       if (char.isLetter) {
         val offset = if (char.isUpper) 'A' else 'a'
-        ((char + shift - offset) % 26 + offset).toChar
+         val newChar = (char + shift - offset) % 26
+        if (newChar < 0) (newChar + 26 + offset).toChar
+        else (newChar + offset).toChar
       } else {
         char
       }
