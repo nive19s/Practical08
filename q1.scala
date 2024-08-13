@@ -2,7 +2,6 @@ import scala.io.StdIn.{readLine,readInt}
 
 object CaesarCipher {
 
-  // Function to encrypt the plaintext
   def encrypt(normaltext: String, shift: Int): String = {
     normaltext.map { char =>
       if (char.isLetter) {
@@ -14,12 +13,10 @@ object CaesarCipher {
     }
   }
 
-  // Function to decrypt the ciphertext
   def decrypt(ciphertext: String, shift: Int): String = {
     encrypt(ciphertext, -shift)
   }
 
-  // Cipher function which takes an encryption or decryption function to process the data
   def cipher(text: String, shift: Int, processFunction: (String, Int) => String): String = {
     processFunction(text, shift)
   }
