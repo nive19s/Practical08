@@ -25,17 +25,24 @@ object CaesarCipher {
   }
 
   def main(args: Array[String]): Unit = {
- 
+    println("Select an option: 1) Encrypt 2) Decrypt")
+    val choice = readInt()
+
     println("Enter the text:")
     val text = readLine()
 
     println("Enter the shift value(Key value) : ")
     val shift = readInt()
 
-    val encrypted = cipher(text, shift, encrypt)
+    choice match {
+      case 1 =>
+        val encrypted = cipher(text, shift, encrypt)
         println(s"Encrypted Text: $encrypted")
-
-     val decrypted = cipher(encrypted, shift, decrypt)
+      case 2 =>
+        val decrypted = cipher(text, shift, decrypt)
         println(s"Decrypted Text: $decrypted")
+      case _ =>
+        println("Please select a valid option.")
+    }
   }
 }
