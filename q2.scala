@@ -9,10 +9,10 @@ object NumberCategorizer {
 
   // Function to categorize the number using pattern matching
   def categorizeNumber(n: Int): String = (isMultipleOfThree(n), isMultipleOfFive(n)) match {
-    case (true, true) => "Multiple of Both Three and Five"
-    case (true, false) => "Multiple of Three"
-    case (false, true) => "Multiple of Five"
-    case _ => "Not a Multiple of Three or Five"
+    case (true, true) => "Given number is Multiple of Both Three and Five"
+    case (true, false) => "Given number is Multiple of Three"
+    case (false, true) => "Given number is Multiple of Five"
+    case _ => "Given number is Not a Multiple of Three or Five"
   }
 
   def main(args: Array[String]): Unit = {
