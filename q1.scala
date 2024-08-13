@@ -1,32 +1,48 @@
+import scala.io.StdIn.{readLine,readInt}
+
 object CaesarCipher {
-  
-  def encrypt(text: String, shift: Int): String = {
-    text.map { char =>
+
+  // Function to encrypt the plaintext
+  def encrypt(normaltext: String, shift: Int): String = {
+    normaltext.map { char =>
       if (char.isLetter) {
-        val shiftBase = if (char.isUpper) 'A' else 'a'
-        ((char - shiftBase + shift) % 26 + shiftBase).toChar
+        val offset = if (char.isUpper) 'A' else 'a'
+        ((char + shift - offset) % 26 + offset).toChar
       } else {
         char
       }
     }
   }
 
-  def decrypt(text: String, shift: Int): String = {
-    encrypt(text, 26 - shift)
+  // Function to decrypt the ciphertext
+  def decrypt(ciphertext: String, shift: Int): String = {
+    encrypt(ciphertext, -shift)
   }
 
-  def cipher(text: String, shift: Int, func: (String, Int) => String): String = {
-    func(text, shift)
+  // Cipher function which takes an encryption or decryption function to process the data
+  def cipher(text: String, shift: Int, processFunction: (String, Int) => String): String = {
+    processFunction(text, shift)
   }
-  
+
   def main(args: Array[String]): Unit = {
-    val text = "Hello World"
-    val shift = 3
+    println("Select an option: 1) Encrypt 2) Decrypt")
+    val choice = readInt()
 
-    val encrypted = cipher(text, shift, encrypt)
-    println(s"Encrypted: $encrypted")
+    println("Enter the text:")
+    val text = readLine()
 
-    val decrypted = cipher(encrypted, shift, decrypt)
-    println(s"Decrypted: $decrypted")
+    println("Enter the shift value(Key value) : ")
+    val shift = readInt()
+
+    choice match {
+      case 1 =>
+        val encrypted = cipher(text, shift, encrypt)
+        println(s"Encrypted Text: $encrypted")
+      case 2 =>
+        val decrypted = cipher(text, shift, decrypt)
+        println(s"Decrypted Text: $decrypted")
+      case _ =>
+        println("Please select a valid option.")
+    }
   }
 }
